@@ -1,8 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
 
 import App from './App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 // import GetSampleBoard from './pages/GetSampleBoard';
 // import MakeBoardName from './pages/MakeBoardName';
 // import MyVisionBoard from './pages/MyVisionBoard';

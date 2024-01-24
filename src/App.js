@@ -6,11 +6,11 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-// import SignIn from './pages/SignIn';
-// import SignUp from './pages/SignUp';
-// import Accounts from './pages/Accounts';
 import Home from './pages/Home';
 // import GetSampleBoard from './pages/GetSampleBoard';
+// import SignUp from './pages/SignUp';
+// import SignIn from './pages/SignIn';
+// import Accounts from './pages/Accounts';
 // import MakeBoardName from './pages/MakeBoardName';
 // import MyVisionBoard from './pages/MyVisionBoard';
 // import MyVisionBoardGrid from './pages/MyVisionBoardGrid';
@@ -18,7 +18,7 @@ import Home from './pages/Home';
 // import Layout from './pages/Layout';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false); // 현재 유저로그인(O: true, X: false)
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -50,7 +50,7 @@ function App() {
         <Route path="/myvisionboardgrid/:id" element={<MyVisionBoardGrid />} />
         <Route path="/visionboardgrid" element={<VisionBoardGrid />} /> */}
 
-        <Route path="*" element={<div>404 not found</div>} />
+        <Route path="*" element={<div>부적절한 접근 입니다. 홈 페이지로 이동하시겠습니까?</div>} />
         {/* home으로 돌아가게 링크  */}
       </Routes>
     // </Layout>
