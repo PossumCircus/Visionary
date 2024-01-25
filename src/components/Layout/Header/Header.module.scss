@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+}
+
+.visionary_game_bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid;
+    background-color: black;
+    .visionary_game_bar_logo {
+        background-color: white;
+        &:hover{
+            background-color: grey;
+        }
+    }
+    .visionary_game_bar_title{
+        background-color: yellow;
+        border: 1px solid black;
+        &:hover{
+            background-color: orange;
+        }
+    }
+    .visionary_game_bar_profile{
+        background-color: pink;
+        &:hover{
+            background-color: red;
+        }
+    }
+}

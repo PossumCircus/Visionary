@@ -15,7 +15,7 @@ import Home from './pages/Home';
 // import MyVisionBoard from './pages/MyVisionBoard';
 // import MyVisionBoardGrid from './pages/MyVisionBoardGrid';
 // import VisionBoardGrid from './pages/VisionBoardGrid';
-// import Layout from './pages/Layout';
+import Layout from './pages/Layout';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -33,7 +33,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    // <Layout>
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* {!isLogin && (
@@ -53,7 +53,7 @@ function App() {
         <Route path="*" element={<div>부적절한 접근 입니다. 홈 페이지로 이동하시겠습니까?</div>} />
         {/* home으로 돌아가게 링크  */}
       </Routes>
-    // </Layout>
+    </Layout>
   );
 }
 
