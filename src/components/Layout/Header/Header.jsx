@@ -12,12 +12,20 @@ function Header() {
   return (
     <>
       <div className={styles.visionary_game_bar}>
-        <div className={styles.visionary_game_bar_logo}><img src={logo} width={'30px'}/>로고</div>
-        <div className={styles.visionary_game_bar_title}>타이틀</div>
-        <div className={styles.visionary_game_bar_profile}>프로필</div>
+        <div className={styles.visionary_game_bar_logo}><img className={styles.visionary_game_bar_title_icon} src={logo} width={'30px'} />로고</div>
+        <div className={styles.visionary_game_bar_titles}>
+          <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>발로란트</span></a>
+          <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>리그오브레전드</span></a>
+          <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>에이펙스레전드</span></a>
+          <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>레인보우식스</span></a>
+        </div>
+        <div className={styles.visionary_game_bar_profile}>
+          <a className={styles.visionary_game_bar_membership}><img/>Get Membership</a>
+          <a className={styles.visionary_game_bar_auth}>로그인자리</a>
+        </div>
       </div>
     </>
   );
 }
 
-export default Nav;
+export default Header;
