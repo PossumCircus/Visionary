@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 // import { IoImages } from 'react-icons/io5';
 // import { FaSearch } from 'react-icons/fa';
 import styles from './Header.module.scss';
-import logo from './visionarySiteLogo.svg'
+import logo from './SiteLogo.png'
 
 function Header() {
 
   return (
     <>
       <div className={styles.visionary_game_bar}>
-        <div className={styles.visionary_game_bar_logo}><img className={styles.visionary_game_bar_title_icon} src={logo} width={'30px'} />로고</div>
+        <div className={styles.visionary_game_bar_logo}><img className={styles.visionary_logo} src={logo}/></div>
         <div className={styles.visionary_game_bar_titles}>
           <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>발로란트</span></a>
           <a className={styles.visionary_game_bar_title}>(svg)<span className={styles.visionary_game_bar_title_label}>리그오브레전드</span></a>

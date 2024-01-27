@@ -60,7 +60,12 @@
 import styles from './Home.module.scss';
 
 function HomeCompo() {
-  return <h1 className={styles.container}>홈페이지 입니다.</h1>;
+  return (
+    <>
+      <h1 className={styles.container}>홈페이지 입니다.</h1>
+    </>
+
+  );
 }
 
 export default HomeCompo;
