@@ -58,11 +58,20 @@
 // export default HomeCompo;
 
 import styles from './Home.module.scss';
+import axios from 'axios'
+const api_key = process.env.REACT_APP_API_KEY
+const platform_id = 'asia'
 
 function HomeCompo() {
+  const data = axios.get(`https://${platform_id}.api.riotgames.com/lol/summoner/v4/summoners/by-name/HideOnBush?api_key=${api_key}`, {
+    withCredentials: true,
+  },).then(res => console.log(res))
+
   return (
     <>
-      <h1 className={styles.container}>홈페이지 입니다.</h1>
+      <div>
+       d
+      </div>
     </>
 
   );
