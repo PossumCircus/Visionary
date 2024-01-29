@@ -58,9 +58,9 @@
 // export default HomeCompo;
 
 import React, { useState, useEffect } from 'react';
-import styles from './Home.module.scss';
+import styles from './HomeCompo.module.scss';
 
-function HomeCompo() {
+export default function HomeCompo() {
 
   return (
     <>
@@ -70,5 +70,3 @@ function HomeCompo() {
 
   );
 }
-
-export default HomeCompo;

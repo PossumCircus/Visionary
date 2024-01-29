@@ -3,9 +3,9 @@ import { Modal, Box } from '@mui/material';
 import arrowBack from './assets/arrow_back_icon.svg';
 import media from './assets/media_icon.svg';
 
-import styles from './CreateVisionBoardModal.module.scss';
+import styles from './VisionBoardModal.module.scss';
 
-export default function CreateVisionBoardModal({
+export default function VisionBoardModal({
   isOpen,
   closeModal,
   handleImageAndTextSelect,
