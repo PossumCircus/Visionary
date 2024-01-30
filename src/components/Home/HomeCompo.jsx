@@ -1,3 +1,23 @@
+import React, { useState, useEffect } from 'react';
+import styles from './HomeCompo.module.scss';
+import VisionBoardModal from '../VisionBoard/VisionBoardModal';
+
+export default function HomeCompo() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalReadOnly, setIsModalReadOnly] = useState(false)
+
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen)
+  }
+
+  return (
+    <>
+      <button onClick={() => setIsModalOpen(!isModalOpen)}>모달 출력</button>
+      {isModalOpen ? <VisionBoardModal isModalOpen={isModalOpen} handleCloseModal={handleCloseModal} isModalReadOnly={isModalReadOnly} /> : <div></div>}
+    </>
+  );
+}
+
 // import React, { useState, useEffect } from 'react';
 // import styles from './Home.module.scss';
 // import { useNavigate } from 'react-router-dom';
@@ -57,16 +77,4 @@
 
 // export default HomeCompo;
 
-import React, { useState, useEffect } from 'react';
-import styles from './HomeCompo.module.scss';
 
-export default function HomeCompo() {
-
-  return (
-    <>
-      <div>
-      </div>
-    </>
-
-  );
-}
