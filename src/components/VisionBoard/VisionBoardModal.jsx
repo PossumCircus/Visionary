@@ -71,7 +71,7 @@ export default function VisionBoardModal({
 
   return (
     <>
-      <div>
+      <div className={styles.modalBackGround}>
         <div className={styles.modalBox}>
           <div className={styles.modalHeader}>
             <button
@@ -92,15 +92,19 @@ export default function VisionBoardModal({
                 alt="미리보기"
               />
             </div>
-            <input
-              type="file"
-              id="file"
-              accept="image/*"
-              ref={imgRef}
-              onChange={saveImgFile}
-              disabled={readOnly}
-            />
-            <div className={styles.modalPostWrite}>
+            <div>
+              <input
+                type="file"
+                id="file"
+                accept="image/*"
+                ref={imgRef}
+                onChange={saveImgFile}
+                disabled={readOnly}
+              />
+            </div>
+          </div>
+          <div className={styles.modalBottom}>
+            <div className={styles.modalWriting}>
               <textarea
                 placeholder={'문구입력...'}
                 value={text}
@@ -111,15 +115,14 @@ export default function VisionBoardModal({
               <p>
                 {characterCount}/{characterLimit} 글자수
               </p>
+              <button className={styles.modalPostButton} onClick={handleSelect}>
+                이미지 선택 완료
+              </button>
             </div>
-            <button className={styles.modalPostButton} onClick={handleSelect}>
-              이미지 선택 완료
-            </button>
           </div>
         </div>
       </div>
     </>
-
   );
 }
 
