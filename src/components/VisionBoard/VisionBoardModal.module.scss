@@ -1,92 +1,67 @@
-.modalBackGround {
-  width: 100%;
-  background-color: grey;
+.modalHeader {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 
-  .modalBox {
-    position: absolute;
-    top: 50%;
-    // top: 50%; 레이아웃의 헤더 때문에 안 보이므로 탑 70 임시 부여.
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70vh;
-    height: 80vh;
-    background-color: red;
-    border-radius: 2%;
-    display: flex;
-    flex-direction: column;
+  border-bottom: 1px gray solid;
+
+  .modalCloseButton {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .modalTitle {
+    margin-right: 30px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    text-align: center;
+
+    font-size: 15px;
+  }
+}
+
+.modalMain {
+  
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .modalUploadFile {
+    
+    position : relative;
+    width : 100%;
+    height : 478px;
+
+    display:flex;
     justify-content: center;
     align-items: center;
 
-    .modalHeader {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 10px 0;
-
-      border-bottom: 1px gray solid;
-
-      .modalCloseButton {
-        border: none;
-        cursor: pointer;
-
-        &>img {
-          width: 22px;
-          height: 22px;
-          background-color: yellow;
-        }
-      }
-
-      .modalTitle {
-        margin-right: 30px;
-        flex-grow: 1;
-        text-align: center;
-
-        font-size: 15px;
-      }
+    .modalUploadImg{
+      position: absolute;
+      // top:0;
+      // left:0;
     }
+  }
 
-    .modalMain {
-      color: black;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      .modalUploadFile {
-        position: relative;
-        width: 100%;
-        height: 55vh;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .modalUploadImg {
-          position: absolute;
-          // top:0;
-          // left:0;
-        }
-      }
+  .modalPostWrite {
+   
+    &>textarea {
+      border: 1px solid #d1d0d0;
+      width: 643px;
+      // 100%로 조정 필요
+      height: 150px;
+      resize: none;
     }
+  }
 
-    .modalBottom {
-      width: 100%;
-      height: 25vh;
-
-      .modalWriting {
-        &>textarea {
-          border: 1px solid #d1d0d0;
-          width: 100%;
-          resize: none;
-        }
-
-        .modalPostButton {
-          width: 100%;
-          border: 1px solid;
-          margin-top: 5px;
-        }
-      }
-    }
+  .modalPostButton {
+    width: 650px;
+    border: 1px solid;
+    margin-top : 20px;
   }
 }
