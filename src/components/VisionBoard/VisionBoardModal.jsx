@@ -5,7 +5,7 @@ import media from './assets/media_icon.svg';
 
 import styles from './VisionBoardModal.module.scss';
 
-export default function ProtoModal({
+export default function VisionBoardModal({
   isModalOpen,
   handleCloseModal,
   // handleImageAndTextSelect,
@@ -74,11 +74,11 @@ export default function ProtoModal({
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 650,
+              width: 750,
               height: 800,
               bgcolor: 'background.paper',
               boxShadow: 24,
-              p: 4,
+              p: 3,
             }}
           >
             <div className={styles.modalHeader}>
@@ -95,8 +95,8 @@ export default function ProtoModal({
                 <img
                   className={styles.modalUploadImg}
                   src={imgFile ? imgFile : media}
-                  width={imgFile ? `100%` : `50%`}
-                  height={imgFile ? `100%` : `50%`}
+                  // width={imgFile ? `100%` : `50%`}
+                  // height={imgFile ? `100%` : `50%`}
                   alt="미리보기"
                 />
               </div>
