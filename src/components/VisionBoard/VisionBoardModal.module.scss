@@ -1,71 +1,93 @@
-.modalHeader {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
+  .modalHeader {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 
-  border-bottom: 1px gray solid;
+    border-bottom: 1px gray solid;
 
-  .modalCloseButton {
-    border: none;
-    background-color: white;
-    cursor: pointer;
+    .modalCloseButton {
+      border: none;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .modalTitle {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 15px;
+    }
   }
 
-  .modalTitle {
-    margin-right: 30px;
-    margin-bottom: 20px;
-    flex-grow: 1;
-    text-align: center;
+  .modalMain {
+    color: black;
 
-    font-size: 15px;
-  }
-}
-
-.modalMain {
-  
-  color: black;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .modalUploadFile {
-    
-    position : relative;
-    width : 100%;
-    height : 718px;
-
-    display:flex;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    .modalUploadImg{
-      position: absolute;
+
+    .modalUploadFileArea {
+      position: relative;
       width: 100%;
-      height: 100%;
-      $imgFile: false;
-      @if $imgFile{
+      height: 718px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .modalImgX {
+        width: 50%;
+        height: 50%;
+      }
+
+      .modalImgO {
         width: 100%;
         height: 100%;
       }
     }
-  }
 
-
-  .modalPostWrite {
-   
-    &>textarea {
-      border: 1px solid #d1d0d0;
+    .modalPostWriteArea {
       width: 100%;
-      height: 100%;
-      resize: none;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        margin-top: 5px;
+        border: 1px solid #d1d0d0;
+        width: 100%;
+        height: 100%;
+        resize: none;
+      }
+
+      .postContents {
+        display: flex;
+        justify-content: space-between;
+
+        >label {
+          display: inline-block;
+          color: #fff;
+          vertical-align: middle;
+          background-color: rgb(64, 96, 204);
+          cursor: pointer;
+        }
+
+        .imgInput {
+          display: inline;
+          position: absolute;
+          width: 0;
+          height: 0;
+          padding: 0;
+          overflow: hidden;
+          border: 0;
+        }
+      }
+    }
+
+    .modalPostButton {
+      width: 100%;
+      border: 1px solid;
+      margin-top: 20px;
     }
   }
-
-  .modalPostButton {
-    width: 100%;
-    border: 1px solid;
-    margin-top : 20px;
-  }
-}
