@@ -1,24 +1,24 @@
 import React, { useState, useRef } from 'react';
-import { Modal, Box, Hidden } from '@mui/material';
+import { Modal, Box } from '@mui/material';
 import arrowBack from './assets/arrow_back_icon.svg';
 import media from './assets/media_icon.svg';
 
-import styles from './VisionBoardModal.module.scss';
+import styles from './CreateVisionBoardModal.module.scss'
 
-export default function VisionBoardModal({
+export default function CreateVisionBoardModal({
   isModalOpen,
-  handleCloseModal,
-  // handleImageAndTextSelect,
-  readOnly
+  closeModal,
+  handleImageAndTextSelect,
 }) {
   const [imgFile, setImgFile] = useState('');
   const [text, setText] = useState('');
+  const [selectedImg, setSelectedImg] = useState('');
 
   const imgRef = useRef(null);
 
   const handleModalClose = () => {
     if (window.confirm('게시물 작성을 취소하시겠습니까?')) {
-      handleCloseModal();
+      closeModal();
     }
   };
 
@@ -28,22 +28,19 @@ export default function VisionBoardModal({
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgFile(reader.result);
+      setSelectedImg(reader.result);
     };
   };
 
   const handleSelect = () => {
     if (imgFile && text) {
-      // 이미지와 문구 모두 등록되어 있는지 확인
       const file = imgRef.current.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const selectedImg = reader.result;
-        // handleImageAndTextSelect(selectedImg, text);
-      };
-      //   closeModal();
+
+      handleImageAndTextSelect(file, text, selectedImg);
+
+      closeModal();
     } else {
-      alert('이미지와 문구를 모두 등록해 주세요.'); // 경고 메시지 표시
+      alert('이미지와 문구를 모두 등록해 주세요.');
     }
   };
 
@@ -107,12 +104,10 @@ export default function VisionBoardModal({
                   value={text}
                   onChange={handleTextChange}
                   onKeyDown={handleKeyDown}
-                  readOnly={readOnly}
                 />
                 <div className={styles.postContents}>
                   <label
                     for="file"
-                    cursor="pointer"
                   >이미지 선택/수정
                     <input
                       className={styles.imgInput}
@@ -121,7 +116,6 @@ export default function VisionBoardModal({
                       accept="image/*"
                       ref={imgRef}
                       onChange={saveImgFile}
-                      disabled={readOnly}
                     />
                   </label>
                   <p>
