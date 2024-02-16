@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { Modal, Box } from '@mui/material';
+import { Modal, Box, Hidden } from '@mui/material';
 import arrowBack from './assets/arrow_back_icon.svg';
 import media from './assets/media_icon.svg';
 
 import styles from './VisionBoardModal.module.scss';
 
-export default function ProtoModal({
+export default function VisionBoardModal({
   isModalOpen,
   handleCloseModal,
   // handleImageAndTextSelect,
@@ -41,7 +41,7 @@ export default function ProtoModal({
         const selectedImg = reader.result;
         // handleImageAndTextSelect(selectedImg, text);
       };
-    //   closeModal();
+      //   closeModal();
     } else {
       alert('이미지와 문구를 모두 등록해 주세요.'); // 경고 메시지 표시
     }
@@ -74,11 +74,11 @@ export default function ProtoModal({
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 650,
-              height: 800,
+              width: 750,
+              height: 850,
               bgcolor: 'background.paper',
               boxShadow: 24,
-              p: 4,
+              p: 2,
             }}
           >
             <div className={styles.modalHeader}>
@@ -89,26 +89,19 @@ export default function ProtoModal({
                 <img width="22px" height="22px" src={arrowBack} alt="닫기" />
               </button>
               <p className={styles.modalTitle}>이미지 올리기</p>
+              <button className={styles.modalPostButton} onClick={handleSelect}>
+                완료
+              </button>
             </div>
             <div className={styles.modalMain}>
-              <div className={styles.modalUploadFile}>
+              <div className={styles.modalUploadFileArea}>
                 <img
-                  className={styles.modalUploadImg}
+                  className={imgFile ? styles.modalImgO : styles.modalImgX}
                   src={imgFile ? imgFile : media}
-                  width={imgFile ? `100%` : `50%`}
-                  height={imgFile ? `100%` : `50%`}
                   alt="미리보기"
                 />
               </div>
-              <input
-                type="file"
-                id="file"
-                accept="image/*"
-                ref={imgRef}
-                onChange={saveImgFile}
-                disabled={readOnly}
-              />
-              <div className={styles.modalPostWrite}>
+              <div className={styles.modalPostWriteArea}>
                 <textarea
                   placeholder={'문구입력...'}
                   value={text}
@@ -116,13 +109,26 @@ export default function ProtoModal({
                   onKeyDown={handleKeyDown}
                   readOnly={readOnly}
                 />
-                <p>
-                  {characterCount}/{characterLimit} 글자수
-                </p>
+                <div className={styles.postContents}>
+                  <label
+                    for="file"
+                    cursor="pointer"
+                  >이미지 선택/수정
+                    <input
+                      className={styles.imgInput}
+                      type="file"
+                      id="file"
+                      accept="image/*"
+                      ref={imgRef}
+                      onChange={saveImgFile}
+                      disabled={readOnly}
+                    />
+                  </label>
+                  <p>
+                    {characterCount}/{characterLimit} 글자수
+                  </p>
+                </div>
               </div>
-              <button className={styles.modalPostButton} onClick={handleSelect}>
-                이미지 선택 완료
-              </button>
             </div>
           </Box>
         </Modal>
