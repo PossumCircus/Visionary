@@ -37,8 +37,10 @@ export default function VisionGrid() {
     { id: '7', img: null, text: null, isChecked: false },
     { id: '8', img: null, text: null, isChecked: false },
   ]);
+  // 유저가 선택한 그리드 실시간 추적
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // 옵션 기본 값은 FullGrid
   const [selectedOption, setSelectedOption] = useState('1');
   const [uploadedText, setUploadedText] = useState(null);
   const [isUploadComplete, setIsUploadComplete] = useState(false);
@@ -49,6 +51,7 @@ export default function VisionGrid() {
   }, [gridItems, selectedOption]);
 
   const checkUploadComplete = () => {
+    // 유저 선택 그리드 값 
     const requiredUploadCount = getRequiredUploadCount();
     let count = 0;
 
@@ -60,13 +63,14 @@ export default function VisionGrid() {
 
     console.log('Upload Count:', count);
     setUploadCount(count);
+    // 유저 선택 그리드 값과 업로드에 필요한 그리드 값이 일치할 경우(true) 업로드 가능.
     setIsUploadComplete(count === requiredUploadCount);
   };
-
+  // 유저 선택 그리드 값 감지
   const getRequiredUploadCount = () => {
     return selectedOption === '1' ? 8 : 4;
   };
-
+  //타이틀을 제외하고 모달 열림
   const handleGridItemClick = (index) => {
     if (gridItems[index].id !== 'name') {
       setSelectedItemIndex(index);
@@ -77,11 +81,14 @@ export default function VisionGrid() {
   const handleImageAndTextSelect = (imgData, textData, imgPreview) => {
     setGridItems((prevGridItems) => {
       const updatedGridItems = [...prevGridItems];
+      // 추적 중인 유저 선택 그리드의 인덱스 내용물 업데이트 후 
       const selectedItem = updatedGridItems[selectedItemIndex];
       selectedItem.img = imgData;
       selectedItem.text = textData;
       selectedItem.imgPreview = imgPreview;
       selectedItem.isChecked = false;
+      console.log('updatedGridItems', updatedGridItems)
+
       return updatedGridItems;
     });
 

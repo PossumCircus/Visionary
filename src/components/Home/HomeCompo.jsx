@@ -8,13 +8,7 @@ export default function HomeCompo() {
 
   return (
     <>
-      <button onClick={() => setIsModalOpen(!isModalOpen)}>모달 출력</button>
-      {isModalOpen ?
-        <CreateVisionBoardModal
-          isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-          isModalReadOnly={isModalReadOnly} />
-        : <div></div>}
+      홈페이지입니다.
     </>
   );
 }
