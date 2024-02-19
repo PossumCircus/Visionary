@@ -81,17 +81,16 @@ export default function VisionGrid() {
   const handleImageAndTextSelect = (imgData, textData, imgPreview) => {
     setGridItems((prevGridItems) => {
       const updatedGridItems = [...prevGridItems];
-      // 추적 중인 유저 선택 그리드의 인덱스 내용물 업데이트 후 
+      // 추적 중인 유저 선택 그리드의 인덱스 내용물 업데이트 후 반환
       const selectedItem = updatedGridItems[selectedItemIndex];
       selectedItem.img = imgData;
       selectedItem.text = textData;
       selectedItem.imgPreview = imgPreview;
       selectedItem.isChecked = false;
-      console.log('updatedGridItems', updatedGridItems)
 
       return updatedGridItems;
     });
-
+    // 아래 후에 삭제.
     console.log(imgData);
     console.log(textData);
 
@@ -267,7 +266,7 @@ export default function VisionGrid() {
       </div>
       <div className={styles.btnContainer}>
         <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
-          선택삭제
+          삭제
         </button>
         <button className={styles.prevBtn} onClick={handleForMakeBoardName}>
           이전
@@ -297,7 +296,7 @@ export default function VisionGrid() {
           ))}
         </form>
         <div className={styles.selectContainer}>
-          <p>개수</p>
+          개수
           <select
             className={styles.selectBtn}
             value={selectedOption}
@@ -316,5 +315,6 @@ export default function VisionGrid() {
         />
       )}
     </div>
+
   );
 }
