@@ -26,14 +26,16 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <Layout>
+    <div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/visionboard" element={<VisionBoard />} />
-        <Route path="*" element={<div>부적절한 접근 입니다. 홈 페이지로 이동하시겠습니까?</div>} />
-        {/* home으로 돌아가게 링크  */}
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/visionboard" element={<VisionBoard />} />
+          <Route path="*" element={<div>부적절한 접근 입니다. 홈 페이지로 이동하시겠습니까?</div>} />
+          {/* home으로 돌아가게 링크  */}
+        </Route>
       </Routes>
-    </Layout>
+    </div>
   );
 }
 
