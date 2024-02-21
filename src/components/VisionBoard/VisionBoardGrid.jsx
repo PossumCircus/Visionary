@@ -271,11 +271,11 @@ export default function VisionGrid() {
         <button className={styles.prevBtn} onClick={handleForMakeBoardName}>
           이전
         </button>
-        <form onSubmit={handleCompleteButtonClick}>
-          <button className={styles.completeBtn} type="submit">
+        <form id="visionBoard"onSubmit={handleCompleteButtonClick}>
+          <button name="completeBtn" className={styles.completeBtn} type="submit">
             완료
           </button>
-          <input type="hidden" name="boardName" value={boardName} />
+          <input type="hidden" name="boardNameInput" value={boardName} />
           {gridItems.map((item, index) => (
             <>
               {item.img && (
@@ -299,6 +299,7 @@ export default function VisionGrid() {
           개수
           <select
             className={styles.selectBtn}
+            name="gridOption"
             value={selectedOption}
             onChange={handleOptionChange}
           >

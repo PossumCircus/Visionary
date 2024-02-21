@@ -10,9 +10,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 750px;
-  height: 750px;
+  transform: translate(-50%, -45%);
+  width: 75dvw;
+  height: 80dvh;
   border: 1px solid lightgray;
   border-radius: 20px;
   backdrop-filter: blur(15px);
@@ -22,23 +22,23 @@
   align-items: center;
 
   @media (max-width:800px) {
-    width: 75dvw;
-    height: 75dvh;
+    // width: 75dvw;
+    // height: 75dvh;
     background-color: yellow;
   }
 
   .gridContainer {
     position: relative;
-    width: 660px;
-    height: 660px;
+    width: 70dvw;
+    height: 70dvh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
 
     @media (max-width:800px) {
-      width: 66dvw;
-      height: 66dvw;
+      // width: 66dvw;
+      // height: 66dvw;
       margin-top: 10px;
     }
 
@@ -138,7 +138,7 @@
   }
 
   .btnContainer {
-    width: 660px;
+    width: 88%;
     height: auto;
     display: flex;
     justify-content: space-between;
@@ -152,14 +152,14 @@
     .prevBtn,
     .completeBtn,
     .selectContainer {
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin-top: 20px;
       width: 12dvw;
     }
 
     .selectContainer {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       color: #fff;
       height: 40px;
       margin-top: 20px;
@@ -174,7 +174,6 @@
         align-items: center;
         width: 35px;
         font-size: 1rem;
-        margin-left: 5px;
       }
     }
 

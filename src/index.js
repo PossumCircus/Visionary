@@ -9,6 +9,7 @@ import {
 
 import Home from './pages/Home';
 import VisionBoard from './pages/VisionBoard';
+import NotFound from "./pages/NotFound";
 // import SignIn from './pages/SignIn';
 // import SignUp from './pages/SignUp';
 // import Accounts from './pages/Accounts';
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
   {
     path: '/', element: <App />, children: [
       { path: '/', element: <Home /> },
-      { path: '/visionBoard', element: <VisionBoard /> },
+      { path: '/visionboard', element: <VisionBoard /> },
+      { path: '*', element: <NotFound /> }
       //   { path: '/getsampleboard', element: <GetSampleBoard /> },
       //   { path: '/makeboardName', element: <MakeBoardName /> },
       //   { path: '/myvisionboard/list', element: <MyVisionBoard /> },
@@ -36,6 +38,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'))
   .render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+      // fallbackElement={<Spinner />}
+      />
     </React.StrictMode>
   );

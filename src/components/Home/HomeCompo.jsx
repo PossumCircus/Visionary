@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './HomeCompo.module.scss';
 import CreateVisionBoardModal from '../VisionBoard/CreateVisionBoardModal';
+import { Link } from 'react-router-dom';
 
 export default function HomeCompo() {
   const [isModalOpen, setIsModalOpen] = useState(false)
