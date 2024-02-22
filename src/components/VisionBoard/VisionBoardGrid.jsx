@@ -12,7 +12,7 @@ export default function VisionGrid() {
     navigate('/makeboardname');
   };
   const location = useLocation();
-  const [boardName, setBoardName] = useState('');
+  const [boardName, setBoardName] = useState('보드네임');
 
   // useEffect(() => {
   //   const params = new URLSearchParams(location.search);
@@ -95,7 +95,7 @@ export default function VisionGrid() {
     console.log(textData);
 
     setUploadedText(textData);
-
+    // 양식 제출 후 모달 닫기
     setIsModalOpen(false);
   };
 
@@ -159,7 +159,7 @@ export default function VisionGrid() {
     setSelectedOption(newSelectedOption);
   };
 
-  const handleCompleteButtonClick = async (e) => {
+  const handleCompleteButtonClickAlert = async (e) => {
     e.preventDefault();
     if (selectedOption === '2') {
       if (uploadCount < 4) {
@@ -264,6 +264,7 @@ export default function VisionGrid() {
           );
         })}
       </div>
+      <input type="hidden" name="boardNameInput" value={boardName} />
       <div className={styles.btnContainer}>
         <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
           삭제
@@ -271,11 +272,10 @@ export default function VisionGrid() {
         <button className={styles.prevBtn} onClick={handleForMakeBoardName}>
           이전
         </button>
-        <form id="visionBoard"onSubmit={handleCompleteButtonClick}>
-          <button name="completeBtn" className={styles.completeBtn} type="submit">
+        <form id="visionBoard" onSubmit={handleCompleteButtonClickAlert} className={styles.completeForm}>
+          <button name="completeBtn" type="submit" className={styles.completeBtn}>
             완료
           </button>
-          <input type="hidden" name="boardNameInput" value={boardName} />
           {gridItems.map((item, index) => (
             <>
               {item.img && (
@@ -308,14 +308,16 @@ export default function VisionGrid() {
           </select>
         </div>
       </div>
-      {isModalOpen && (
-        <CreateVisionBoardModal
-          isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-          handleImageAndTextSelect={handleImageAndTextSelect}
-        />
-      )}
-    </div>
+      {
+        isModalOpen && (
+          <CreateVisionBoardModal
+            isModalOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+            handleImageAndTextSelect={handleImageAndTextSelect}
+          />
+        )
+      }
+    </div >
 
   );
 }

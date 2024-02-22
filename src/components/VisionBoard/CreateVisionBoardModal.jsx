@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Modal, Box } from '@mui/material';
+import { Modal, Box, useMediaQuery } from '@mui/material';
 import arrowBack from './assets/arrow_back_icon.svg';
 import media from './assets/media_icon.svg';
-
 import styles from './CreateVisionBoardModal.module.scss'
 
 export default function CreateVisionBoardModal({
@@ -13,8 +12,8 @@ export default function CreateVisionBoardModal({
   const [imgFile, setImgFile] = useState('');
   const [text, setText] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
-
   const imgRef = useRef(null);
+  const muiMediaQuery = useMediaQuery('(min-width:800px)')
 
   const handleModalClose = () => {
     if (window.confirm('게시물 작성을 취소하시겠습니까?')) {
@@ -71,7 +70,7 @@ export default function CreateVisionBoardModal({
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '47dvh',
+              width: '45dvw',
               height: '85dvh',
               bgcolor: 'background.paper',
               boxShadow: 24,
