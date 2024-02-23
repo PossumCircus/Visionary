@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styles from './HomeCompo.module.scss';
-import VisionBoardModal from '../VisionBoard/VisionBoardModal';
+import CreateVisionBoardModal from '../VisionBoard/CreateVisionBoardModal';
+import { Link } from 'react-router-dom';
 
 export default function HomeCompo() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isModalReadOnly, setIsModalReadOnly] = useState(false)
 
-  const handleCloseModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
-
   return (
     <>
-      <button onClick={() => setIsModalOpen(!isModalOpen)}>모달 출력</button>
-      {isModalOpen ? <VisionBoardModal isModalOpen={isModalOpen} handleCloseModal={handleCloseModal} isModalReadOnly={isModalReadOnly} /> : <div></div>}
+      홈페이지입니다.
     </>
   );
 }
