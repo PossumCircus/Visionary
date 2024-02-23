@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function VisionGrid() {
   const navigate = useNavigate();
-  const handleForMakeBoardName = () => {
+  const handleNavigateToBoardName = () => {
     navigate('/makeboardname');
   };
   const location = useLocation();
@@ -124,14 +124,14 @@ export default function VisionGrid() {
 
   const handleOptionChange = (e) => {
     const newSelectedOption = e.target.value;
-
+    // 그리드 옵션이 2(4개) 일 경우 이미지 유무 확인
     if (newSelectedOption === '2') {
       const skippedGridIds = ['name', '2', '4', '5', '7'];
-      const hasUploadedImages = gridItems
+      const uploadedImageCheck = gridItems
         .filter((item) => !skippedGridIds.includes(item.id))
         .some((item) => item.img !== null);
 
-      if (hasUploadedImages) {
+      if (uploadedImageCheck) {
         const confirmed = window.confirm(
           '기존에 업로드한 이미지는 삭제됩니다. 변경하시겠습니까?'
         );
@@ -161,16 +161,12 @@ export default function VisionGrid() {
 
   const handleCompleteButtonClickAlert = async (e) => {
     e.preventDefault();
-    if (selectedOption === '2') {
-      if (uploadCount < 4) {
-        alert('4개의 텍스트와 이미지를 업로드해야 합니다.');
-        return;
-      }
-    } else if (selectedOption === '1') {
-      if (uploadCount < 8) {
-        alert('8개의 텍스트와 이미지를 업로드해야 합니다.');
-        return;
-      }
+    if (selectedOption === '2' && uploadCount < 4) {
+      alert('4개의 텍스트와 이미지를 업로드해야 합니다.');
+      return;
+    } else if (selectedOption === '1' && uploadCount < 8) {
+      alert('8개의 텍스트와 이미지를 업로드해야 합니다.');
+      return;
     }
 
     const formData = new FormData();
@@ -269,7 +265,7 @@ export default function VisionGrid() {
         <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
           삭제
         </button>
-        <button className={styles.prevBtn} onClick={handleForMakeBoardName}>
+        <button className={styles.prevBtn} onClick={handleNavigateToBoardName}>
           이전
         </button>
         <form id="visionBoard" onSubmit={handleCompleteButtonClickAlert} className={styles.completeForm}>
