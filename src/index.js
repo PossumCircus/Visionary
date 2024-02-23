@@ -10,6 +10,8 @@ import {
 import Home from './pages/Home';
 import VisionBoard from './pages/VisionBoard';
 import NotFound from "./pages/NotFound";
+import CustomBoard from "./pages/CustomBoard";
+import MyVisionBoard from "./pages/MyVisionBoard";
 // import SignIn from './pages/SignIn';
 // import SignUp from './pages/SignUp';
 // import Accounts from './pages/Accounts';
@@ -22,8 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/', element: <App />, children: [
       { path: '/', element: <Home /> },
+      { path: '*', element: <NotFound /> },
       { path: '/visionboard', element: <VisionBoard /> },
-      { path: '*', element: <NotFound /> }
+      { path: '/myvisionboard', element: <MyVisionBoard /> },
+      { path: '/customboard', element: <CustomBoard /> },
       //   { path: '/getsampleboard', element: <GetSampleBoard /> },
       //   { path: '/makeboardName', element: <MakeBoardName /> },
       //   { path: '/myvisionboard/list', element: <MyVisionBoard /> },

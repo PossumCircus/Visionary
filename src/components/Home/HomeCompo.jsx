@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './HomeCompo.module.scss';
-import CreateVisionBoardModal from '../VisionBoard/CreateVisionBoardModal';
+import CreateVisionBoardModal from '../VisionBoard/Modal/CreateVisionBoardModal';
 import { Link } from 'react-router-dom';
 
 export default function HomeCompo() {

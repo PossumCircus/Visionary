@@ -10,12 +10,14 @@ import Home from './pages/Home';
 import Layout from './pages/Layout';
 import VisionBoard from './pages/VisionBoard';
 import NotFound from './pages/NotFound';
+import CustomBoard from './pages/CustomBoard';
+import MyVisionBoard from './pages/MyVisionBoard';
+
 
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
-
   const location = useLocation();
 
   useEffect(() => {
@@ -33,6 +35,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/visionboard" element={<VisionBoard />} />
+          <Route path="/customboard" element={<CustomBoard />} />
+          <Route path="/myvisionboard" element={<MyVisionBoard />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

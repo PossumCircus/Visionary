@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Box, useMediaQuery } from '@mui/material';
 import arrowBack from './assets/arrow_back_icon.svg';
 import media from './assets/media_icon.svg';
-import styles from './CreateVisionBoardModal.module.scss'
+import styles from './VisionBoardModal.module.scss'
 
 export default function CreateVisionBoardModal({
   isModalOpen,
@@ -84,7 +84,7 @@ export default function CreateVisionBoardModal({
               >
                 <img width="22px" height="22px" src={arrowBack} alt="닫기" />
               </button>
-              <p className={styles.modalTitle}>이미지 올리기</p>
+              <p className={styles.modalTitle}>이미지 업로드</p>
               <button className={styles.modalPostButton} onClick={handleSelect}>
                 완료
               </button>
@@ -106,8 +106,9 @@ export default function CreateVisionBoardModal({
                 />
                 <div className={styles.postContents}>
                   <label
+                    className={styles.inputLabel}
                     for="file"
-                  >이미지 선택/수정
+                  >이미지 선택
                     <input
                       className={styles.imgInput}
                       type="file"

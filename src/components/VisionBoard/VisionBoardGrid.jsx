@@ -3,16 +3,16 @@ import styles from './VisionBoardGrid.module.scss';
 import axios from 'axios';
 
 import React, { useState, useEffect } from 'react';
-import CreateVisionBoardModal from './../VisionBoard/CreateVisionBoardModal';
 import { useNavigate, useLocation } from 'react-router-dom';
+import CreateVisionBoardModal from './Modal/CreateVisionBoardModal';
 
-export default function VisionGrid() {
+export default function VisionBoardGrid() {
   const navigate = useNavigate();
   const handleNavigateToBoardName = () => {
     navigate('/makeboardname');
   };
   const location = useLocation();
-  const [boardName, setBoardName] = useState('보드네임');
+  const [boardName, setBoardName] = useState('보드네임위치');
 
   // useEffect(() => {
   //   const params = new URLSearchParams(location.search);
@@ -260,7 +260,6 @@ export default function VisionGrid() {
           );
         })}
       </div>
-      <input type="hidden" name="boardNameInput" value={boardName} />
       <div className={styles.btnContainer}>
         <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
           삭제
@@ -313,6 +312,15 @@ export default function VisionGrid() {
           />
         )
       }
+      {/* {
+        isModalOpen && (
+          <EditVisionBoardModal
+            isModalOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+            handleImageAndTextSelect={handleImageAndTextSelect}
+          />
+        )
+      } */}
     </div >
 
   );

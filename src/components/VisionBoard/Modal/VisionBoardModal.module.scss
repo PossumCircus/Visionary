@@ -65,7 +65,13 @@
         display: flex;
         justify-content: space-between;
 
-        >label {
+        .inputLabelNoPointer {
+          color: #fff;
+          background-color: red;
+          cursor: not-allowed;
+        }
+
+        .inputLabel {
           color: #fff;
           background-color: rgb(64, 96, 204);
           cursor: pointer;
