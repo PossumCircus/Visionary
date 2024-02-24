@@ -72,9 +72,11 @@ export default function EditVisionBoardModal({
     formData.append('image', imgRef.current.files[0]);
 
     try {
-      const response = await axios.put(`/api/v1/images?name=${prevImgGrid[selectedGrid].fileName}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await axios.put(`/api/v1/images?name=${prevImgGrid[selectedGrid].fileName}`,
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
       if (response.status >= 200 && response.status < 300) {
         console.log('img put data 전송 완료', response);
@@ -113,9 +115,11 @@ export default function EditVisionBoardModal({
     }
 
     try {
-      const response = await axios.put(`/api/v1/visionboard?id=${id}`, requestData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await axios.put(`/api/v1/visionboard?id=${id}`,
+        requestData,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        });
 
       if (response.status >= 200 && response.status < 300) {
         console.log('text put data 전송 완료', response);
@@ -161,7 +165,6 @@ export default function EditVisionBoardModal({
                 handleSelect()
                 modalImgPutApi()
                 modalTextPutApi()
-                // console.log('gridItems[4].id', gridItems[4].id)
                 console.log('prevImgGrid[selectedGrid].fileName', prevImgGrid[selectedGrid].fileName)
                 console.log('gridItems', gridItems)
               }}>
@@ -189,7 +192,7 @@ export default function EditVisionBoardModal({
                   <label
                     className={readOnly ? styles.inputLabelNoPointer : styles.inputLabel}
                     for="file"
-                  >이미지 수정
+                  >이미지 선택
                     <input
                       className={styles.imgInput}
                       type="file"

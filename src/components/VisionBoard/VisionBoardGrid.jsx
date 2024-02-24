@@ -159,7 +159,7 @@ export default function VisionBoardGrid() {
     setSelectedOption(newSelectedOption);
   };
 
-  const handleCompleteButtonClickAlert = async (e) => {
+  const handleUploadCompleteButton = async (e) => {
     e.preventDefault();
     if (selectedOption === '2' && uploadCount < 4) {
       alert('4개의 텍스트와 이미지를 업로드해야 합니다.');
@@ -188,30 +188,28 @@ export default function VisionBoardGrid() {
     formData.append('title', boardName);
 
     console.log(Array.from(formData.entries()));
-
     console.log(formData);
 
     try {
-      const response = await axios.post('/api/v1/visionboard', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await axios.post('/api/v1/visionboard',
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
       if (response.status === 201) {
         console.log('Images and descriptions uploaded successfully');
-        console.log(response);
+        console.log('response:', response);
         alert('비전보드 생성이 완료되었습니다.');
         navigate('/myvisionboard/list');
       } else if (response.status === 401) {
-        console.log('401: 인증되지 않음');
+        console.error('401: 인증되지 않음');
         localStorage.removeItem('isLogin');
         navigate('/');
       } else if (response.status === 500) {
-        console.log('500: 내부 서버 오류');
+        console.error('500: 내부 서버 오류');
       }
-      // else {
-      //   console.log('기타 상태');
-      //   alert('오류가 발생했습니다.');
-      // }
+
     } catch (error) {
       console.error('에러:', error);
     }
@@ -267,7 +265,7 @@ export default function VisionBoardGrid() {
         <button className={styles.prevBtn} onClick={handleNavigateToBoardName}>
           이전
         </button>
-        <form id="visionBoard" onSubmit={handleCompleteButtonClickAlert} className={styles.completeForm}>
+        <form id="visionBoard" onSubmit={handleUploadCompleteButton} className={styles.completeForm}>
           <button name="completeBtn" type="submit" className={styles.completeBtn}>
             완료
           </button>
