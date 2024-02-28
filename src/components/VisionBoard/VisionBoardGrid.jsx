@@ -174,7 +174,7 @@ export default function VisionBoardGrid() {
     let descriptionIndex = 1;
 
     for (const item of gridItems) {
-      console.log(item, item.img);
+      console.log('gridItems의 iteration:', item);
       if (item.img) {
         formData.append(`image${imageIndex}`, item.img);
         imageIndex++;
@@ -187,11 +187,10 @@ export default function VisionBoardGrid() {
 
     formData.append('title', boardName);
 
-    console.log(Array.from(formData.entries()));
-    console.log(formData);
+    console.log('formData:', Array.from(formData.entries()));
 
     try {
-      const response = await axios.post('/api/v1/visionboard',
+      const response = await axios.post('localhost:3001/api/v1/visionboard',
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -320,6 +319,5 @@ export default function VisionBoardGrid() {
         )
       } */}
     </div >
-
   );
 }
