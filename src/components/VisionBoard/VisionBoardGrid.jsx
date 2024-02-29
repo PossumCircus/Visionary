@@ -200,7 +200,7 @@ export default function VisionBoardGrid() {
         console.log('Images and descriptions uploaded successfully');
         console.log('response:', response);
         alert('비전보드 생성이 완료되었습니다.');
-        navigate('/myvisionboard/list');
+        // navigate('/myvisionboard/list');
       } else if (response.status === 401) {
         console.error('401: 인증되지 않음');
         localStorage.removeItem('isLogin');
