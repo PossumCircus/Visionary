@@ -31,7 +31,7 @@ export default function VisionBoardGrid() {
     { id: '2', img: null, text: null, isChecked: false },
     { id: '3', img: null, text: null, isChecked: false },
     { id: '4', img: null, text: null, isChecked: false },
-    { id: '9', text: null },
+    { id: 'name' },
     { id: '5', img: null, text: null, isChecked: false },
     { id: '6', img: null, text: null, isChecked: false },
     { id: '7', img: null, text: null, isChecked: false },
@@ -72,7 +72,7 @@ export default function VisionBoardGrid() {
   };
   //타이틀을 제외하고 모달 열림
   const handleGridItemClick = (index) => {
-    if (gridItems[index].id !== '9') {
+    if (gridItems[index].id !== 'name') {
       setSelectedItemIndex(index);
       setIsModalOpen(true);
     }
@@ -126,7 +126,7 @@ export default function VisionBoardGrid() {
     const newSelectedOption = e.target.value;
     // 그리드 옵션이 2(4개) 일 경우 이미지 유무 확인
     if (newSelectedOption === '2') {
-      const skippedGridIds = ['9', '2', '4', '5', '7'];
+      const skippedGridIds = ['name', '2', '4', '5', '7'];
       const uploadedImageCheck = gridItems
         .filter((item) => !skippedGridIds.includes(item.id))
         .some((item) => item.img !== null);
@@ -190,7 +190,7 @@ export default function VisionBoardGrid() {
     console.log('formData:', Array.from(formData.entries()));
 
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/visionboard/multiplecreate',
+      const response = await axios.post('localhost:3001/api/v1/visionboard',
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -220,7 +220,7 @@ export default function VisionBoardGrid() {
         {gridItems.map((item, index) => {
           const isHidden = selectedOption === '2' && [0, 2, 6, 8].includes(index);
           const gridItemClassName = `${styles.gridItem} ${isHidden ? styles.hidden : ''} ${item.img ? styles.hiddenBorder : ''}`;
-          if (item.id === '9') {
+          if (item.id === 'name') {
             return (
               <div className={styles.gridBoardName}>
                 <div>{boardName}</div>
@@ -229,10 +229,10 @@ export default function VisionBoardGrid() {
           } else return (
             <div
               key={item.id}
-              className={item.id === '9' ? '' : `${gridItemClassName} ${styles.hoverable}`}
+              className={item.id === 'name' ? '' : `${gridItemClassName} ${styles.hoverable}`}
               onClick={() => handleGridItemClick(index)}
             >
-              {item.id !== '9' && (
+              {item.id !== 'name' && (
                 <>
                   {item.imgPreview && (
                     <img src={item.imgPreview} alt="Selected" />

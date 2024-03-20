@@ -21,3 +21,36 @@ https://erwinousy.medium.com/z-index%EA%B0%80-%EB%8F%99%EC%9E%91%ED%95%98%EC%A7%
 ++문제 원인 : form 태그 안에 button 태그를 함께 써서 생기는 문제. 버튼에 넓이를 주면 form도 그 만큼 늘어나서 발생하는 문제 같음.
 -부모 태그를 무시하고 자식 태그에서 큰 넓이를 줘서 발생한 문제?
 !! form에 className 부여, form의 width를 12dvw로 설정후 btn을 width : 100%로 할당하여 해결.
+
+24.03.20
+ⓐ TypeError: Failed to execute 'readAsDataURL' on 'FileReader': parameter 1 is not of type 'Blob'. <<SOLVED>>
+++원인 : 이미지를 선택한 상태에서 새로 이미지를 선택하려는 과정에서 취소시 나타난 오류.
+!! useState로 기존 값 상태관리를 통해 해결
+https://velog.io/@syncstar/TypeError-Failed-to-execute-readAsDataURL-on-FileReader-parameter-1-is-not-of-type-Blob.-%EC%97%90%EB%9F%AC
+    <!-- before -->
+  const saveImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+      setSelectedImg(reader.result);
+    };
+  };
+    <!-- after-->
+  const [previousImgRef, setPreviousImgRef] = useState(null);
+
+  const saveImgFile = () => {
+    let file = imgRef.current.files[0];
+    setPreviousImgRef(file)
+    if (imgRef.current.files.length === 0) {
+      file = previousImgRef;
+      return file
+    }
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+      setSelectedImg(reader.result);
+    };
+  };

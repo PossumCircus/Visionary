@@ -12,6 +12,7 @@ export default function CreateVisionBoardModal({
   const [imgFile, setImgFile] = useState('');
   const [text, setText] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
+  const [previousImgRef, setPreviousImgRef] = useState(null);
   const imgRef = useRef(null);
   const muiMediaQuery = useMediaQuery('(min-width:800px)')
 
@@ -22,13 +23,21 @@ export default function CreateVisionBoardModal({
   };
 
   const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
+    let file = imgRef.current.files[0];
+    setPreviousImgRef(file)
+
+    if (imgRef.current.files.length === 0) {
+      file = previousImgRef;
+      return file
+    }
+
+    let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgFile(reader.result);
       setSelectedImg(reader.result);
     };
+
   };
 
   const handleSelect = () => {
