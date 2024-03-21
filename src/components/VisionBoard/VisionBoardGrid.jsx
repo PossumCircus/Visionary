@@ -31,11 +31,11 @@ export default function VisionBoardGrid() {
     { id: '2', img: null, text: null, isChecked: false },
     { id: '3', img: null, text: null, isChecked: false },
     { id: '4', img: null, text: null, isChecked: false },
-    { id: '9', text: null },
-    { id: '5', img: null, text: null, isChecked: false },
+    { id: '5', title: null },
     { id: '6', img: null, text: null, isChecked: false },
     { id: '7', img: null, text: null, isChecked: false },
     { id: '8', img: null, text: null, isChecked: false },
+    { id: '9', img: null, text: null, isChecked: false },
   ]);
   // 유저가 선택한 그리드 실시간 추적
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
@@ -72,7 +72,7 @@ export default function VisionBoardGrid() {
   };
   //타이틀을 제외하고 모달 열림
   const handleGridItemClick = (index) => {
-    if (gridItems[index].id !== '9') {
+    if (gridItems[index].id !== '5') {
       setSelectedItemIndex(index);
       setIsModalOpen(true);
     }
@@ -124,13 +124,14 @@ export default function VisionBoardGrid() {
 
   const handleOptionChange = (e) => {
     const newSelectedOption = e.target.value;
-    // 그리드 옵션이 2(4개) 일 경우 이미지 유무 확인
+    // 그리드 옵션이 2(4개) 일 경우 1,3,7,9 그리드의 이미지 유무 확인
     if (newSelectedOption === '2') {
-      const skippedGridIds = ['9', '2', '4', '5', '7'];
+      const skippedGridIds = ['2', '4', '5', '6', '8'];
+      console.log(gridItems.map(v => v.id))
       const uploadedImageCheck = gridItems
         .filter((item) => !skippedGridIds.includes(item.id))
         .some((item) => item.img !== null);
-
+      console.log(uploadedImageCheck)
       if (uploadedImageCheck) {
         const confirmed = window.confirm(
           '기존에 업로드한 이미지는 삭제됩니다. 변경하시겠습니까?'
@@ -176,8 +177,8 @@ export default function VisionBoardGrid() {
     for (const item of gridItems) {
       console.log('gridItems의 iteration:', item);
       if (item.img) {
-        formData.append(`image${imageIndex}`, item.img);
-        imageIndex++;
+        formData.append(`visionBoardData`, item.img);
+        // imageIndex++;
       }
       if (item.text) {
         formData.append(`description${descriptionIndex}`, item.text);
@@ -190,7 +191,7 @@ export default function VisionBoardGrid() {
     console.log('formData:', Array.from(formData.entries()));
 
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/visionboard/multiplecreate',
+      const response = await axios.post('http://localhost:3001/api/v1/visionboard/create/multiple',
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -220,7 +221,7 @@ export default function VisionBoardGrid() {
         {gridItems.map((item, index) => {
           const isHidden = selectedOption === '2' && [0, 2, 6, 8].includes(index);
           const gridItemClassName = `${styles.gridItem} ${isHidden ? styles.hidden : ''} ${item.img ? styles.hiddenBorder : ''}`;
-          if (item.id === '9') {
+          if (item.id === '5') {
             return (
               <div className={styles.gridBoardName}>
                 <div>{boardName}</div>
@@ -229,10 +230,10 @@ export default function VisionBoardGrid() {
           } else return (
             <div
               key={item.id}
-              className={item.id === '9' ? '' : `${gridItemClassName} ${styles.hoverable}`}
+              className={item.id === '5' ? '' : `${gridItemClassName} ${styles.hoverable}`}
               onClick={() => handleGridItemClick(index)}
             >
-              {item.id !== '9' && (
+              {item.id !== '5' && (
                 <>
                   {item.imgPreview && (
                     <img src={item.imgPreview} alt="Selected" />
@@ -264,8 +265,8 @@ export default function VisionBoardGrid() {
         <button className={styles.prevBtn} onClick={handleNavigateToBoardName}>
           이전
         </button>
-        <form id="visionBoard" onSubmit={handleUploadCompleteButton} className={styles.completeForm}>
-          <button name="completeBtn" type="submit" className={styles.completeBtn}>
+        <form id="visionBoard" onSubmit={handleUploadCompleteButton} className={styles.completeForm} name='visionBoardData'>
+          <button name="visionBoardData" type="submit" className={styles.completeBtn}>
             완료
           </button>
           {gridItems.map((item, index) => (

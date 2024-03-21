@@ -54,3 +54,10 @@ https://velog.io/@syncstar/TypeError-Failed-to-execute-readAsDataURL-on-FileRead
       setSelectedImg(reader.result);
     };
   };
+
+
+24.03.21
+ⓐ 멀터오류 { [Error: Unexpected field]  code: 'LIMIT_UNEXPECTED_FILE',  field: 'file',  storageErrors: [] } <<SOLVED>>
+++원인 : input의 name태그가 멀터에서 지정한 프로퍼티와 이름이 맞지 않아 발생한 오류
+https://github.com/expressjs/multer/issues/159
+!! 그리드 아이템의 각 input name을 visionBoardData로 지정하여 오류 해결.
