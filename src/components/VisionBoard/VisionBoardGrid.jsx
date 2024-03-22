@@ -14,6 +14,8 @@ export default function VisionBoardGrid() {
   const location = useLocation();
   const [boardName, setBoardName] = useState('보드네임위치');
 
+  const origin = 'http://localhost:3001'
+
   // useEffect(() => {
   //   const params = new URLSearchParams(location.search);
   //   const queryBoardName = params.get('boardName');
@@ -31,7 +33,7 @@ export default function VisionBoardGrid() {
     { id: '2', img: null, text: null, isChecked: false },
     { id: '3', img: null, text: null, isChecked: false },
     { id: '4', img: null, text: null, isChecked: false },
-    { id: '5', title: null },
+    { id: '5', title: '테스트용타이틀' },
     { id: '6', img: null, text: null, isChecked: false },
     { id: '7', img: null, text: null, isChecked: false },
     { id: '8', img: null, text: null, isChecked: false },
@@ -171,35 +173,28 @@ export default function VisionBoardGrid() {
     }
 
     const formData = new FormData();
-    let imageIndex = 1;
-    let descriptionIndex = 1;
 
+    formData.append('visionBoardData', gridItems[4].title)
+    
     for (const item of gridItems) {
-      console.log('gridItems의 iteration:', item);
-      if (item.img) {
-        formData.append(`visionBoardData`, item.img);
-        // imageIndex++;
-      }
-      if (item.text) {
-        formData.append(`description${descriptionIndex}`, item.text);
-        descriptionIndex++;
+      console.log('폼데이터 gridItems의 iteration:', item);
+      if (item.img && item.text) {
+        formData.append('visionBoardData', item.text);
+        formData.append('visionBoardData', item.img);
       }
     }
-
-    formData.append('title', boardName);
 
     console.log('formData:', Array.from(formData.entries()));
 
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/visionboard/create/multiple',
+      const response = await axios.post(`${origin}/api/v1/visionboard/create/multiple`,
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
 
       if (response.status === 201) {
-        console.log('Images and descriptions uploaded successfully');
-        console.log('response:', response);
+        console.log('response:', response.data.success);
         alert('비전보드 생성이 완료되었습니다.');
         // navigate('/myvisionboard/list');
       } else if (response.status === 401) {
