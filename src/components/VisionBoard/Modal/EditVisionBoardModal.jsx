@@ -10,11 +10,11 @@ export default function EditVisionBoardModal({
   closeModal,
   handleImageAndTextSelect,
   readOnly,
-  gridItems,
-  selectedGrid,
-  prevImgGrid,
-  id,
-  dataLength
+  // gridItems,
+  // selectedGrid,
+  // prevImgGrid,
+  // id,
+  // dataLength
 }) {
 
   const [imgFile, setImgFile] = useState('');
@@ -22,7 +22,6 @@ export default function EditVisionBoardModal({
   const [selectedImg, setSelectedImg] = useState('');
   const imgRef = useRef(null);
   const textRef = useRef(null);
-  const muiMediaQuery = useMediaQuery('(min-width:800px)')
 
   const handleModalClose = () => {
     if (window.confirm('게시물 작성을 취소하시겠습니까?')) {
@@ -110,7 +109,7 @@ export default function EditVisionBoardModal({
     }
 
     const requestData = {
-      title: gridItems[4].id,
+      title: gridItems[4].title,
       sequence: sequence,
     }
 
