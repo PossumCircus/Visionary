@@ -1,14 +1,13 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './VisionBoardGrid.module.scss'
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import EditVisionBoardModal from "./Modal/EditVisionBoardModal";
 
-const getApi = async (id) => {
+const getVisionBoardDataById = async (id) => {
 
   try {
-    const response = await fetch(`/api/v1/visionboard?id=${id}`, {
-      method: 'GET',
+    const response = await axios.get(`/api/v1/visionboard?id=${id}`, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -28,11 +27,9 @@ const getApi = async (id) => {
   }
 };
 
-const deleteApi = async (id) => {
+const deleteVisionBoardDataById = async (id) => {
   try {
-    await fetch(`/api/v1/myvisionboard?id=${id}`, {
-      method: 'DELETE',
-    })
+    await axios.delete(`/api/v1/myvisionboard?id=${id}`)
     console.log('delete성공')
   } catch (error) {
     console.error('Error:', error)
@@ -65,7 +62,7 @@ export default function MyVisionBoardGrid() {
   useEffect(() => {
     const fetchingData = async () => {
       try {
-        const result = await getApi(id);
+        const result = await getVisionBoardDataById(id);
         if (result) {
           const fetchedData = result.data.visionboardcontentSequence;
           const dataLength = fetchedData.length;
@@ -251,17 +248,21 @@ export default function MyVisionBoardGrid() {
   }, [gridItems, selectedOption]);
 
   // 목록으로 돌아가기 버튼
-  const handleBackToMyCollection = useCallback(() => {
+  const handleNavigateToMyVisionBoardList = useCallback(() => {
     navigate('/myvisionboard/list');
   }, []);
-  // 비전보드 삭제 버튼
+
   const handleBoardDelete = useCallback(() => {
     if (window.confirm('현재 열람중인 비전보드를 삭제하시겠습니까?')) {
-      console.log('삭제됨');
-      deleteApi(id);
-      handleBackToMyCollection();
+      alert('성공적으로 삭제하였습니다.');
+      deleteVisionBoardDataById(id);
+      handleNavigateToMyVisionBoardList();
     }
   }, []);
+
+  const getRequiredUploadCount = () => {
+    return selectedOption === '1' ? 8 : 4;
+  };
 
   const checkUploadComplete = () => {
     const requiredUploadCount = getRequiredUploadCount();
@@ -276,12 +277,8 @@ export default function MyVisionBoardGrid() {
     setIsUploadComplete(count === requiredUploadCount);
   };
 
-  const getRequiredUploadCount = () => {
-    return selectedOption === '1' ? 8 : 4;
-  };
-
   const handleGridItemClick = (index) => {
-    if (gridItems[index].id !== 'name') {
+    if (gridItems[index].id !== '5') {
       setSelectedGrid(index);
       setSelectedItemIndex(index);
       if (readOnly === true) {
@@ -335,12 +332,11 @@ export default function MyVisionBoardGrid() {
     const newSelectedOption = e.target.value;
 
     if (newSelectedOption === '2') {
-      const skippedGridIds = ['name', '2', '4', '5', '7'];
-      const hasUploadedImages = gridItems
+      const skippedGridIds = ['2', '4', '5', '6', '8'];
+      const uploadedImageCheck = gridItems
         .filter((item) => !skippedGridIds.includes(item.id))
         .some((item) => item.img !== null);
-
-      if (hasUploadedImages) {
+      if (uploadedImageCheck) {
         const confirmed = window.confirm(
           '기존에 업로드한 이미지는 삭제됩니다. 변경하시겠습니까?'
         );
@@ -383,7 +379,6 @@ export default function MyVisionBoardGrid() {
     }
 
     const formData = new FormData();
-
     formData.append('visionBoardData', gridItems[4].title)
 
     for (const item of gridItems) {
@@ -468,16 +463,16 @@ export default function MyVisionBoardGrid() {
           <button
             className={styles.deleteBtn}
             onClick={() => {
-              handleBackToMyCollection();
+              handleNavigateToMyVisionBoardList();
             }}
           >
-            비전보드 목록
+            목록으로 이동
           </button>
           <button
             className={styles.deleteBtn}
             onClick={() => setReadOnly(false)}
           >
-            수정하기
+            보드 수정
           </button>
           <button
             className={styles.deleteBtn}
@@ -488,11 +483,10 @@ export default function MyVisionBoardGrid() {
             보드 삭제
           </button>
         </div>
-
       ) : (
         <div className={styles.btnContainer}>
           <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
-            삭제
+            선택 삭제
           </button>
           <button className={styles.prevBtn} onClick={() => alert('handleNavigateToBoardName')}>
             이전
@@ -508,15 +502,13 @@ export default function MyVisionBoardGrid() {
                     type="hidden"
                     name={`image${index + 1}`}
                     value={item.img}
-                  />
-                )}
+                  />)}
                 {item.text && (
                   <input
                     type="hidden"
                     name={`description${index + 1}`}
                     value={item.text}
-                  />
-                )}
+                  />)}
               </>
             ))}
           </form>

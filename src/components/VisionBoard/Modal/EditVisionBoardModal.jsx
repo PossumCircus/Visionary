@@ -20,6 +20,7 @@ export default function EditVisionBoardModal({
   const [imgFile, setImgFile] = useState('');
   const [text, setText] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
+  const [previousImgRef, setPreviousImgRef] = useState(null);
   const imgRef = useRef(null);
   const textRef = useRef(null);
 
@@ -30,10 +31,17 @@ export default function EditVisionBoardModal({
   };
 
   const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
+    let file = imgRef.current.files[0];
+    setPreviousImgRef(file)
+
+    if (imgRef.current.files.length === 0) {
+      file = previousImgRef;
+      return file
+    }
+
+    let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => {
+    reader.onloadend = () => {
       setImgFile(reader.result);
       setSelectedImg(reader.result);
     };
@@ -59,13 +67,15 @@ export default function EditVisionBoardModal({
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       setText((prevText) => prevText + '\n');
     }
   };
 
+
+  // ㅁ달 이미지 및 텍스트를 myvisionboardgrid에서 보내야함
   const modalImgPutApi = async () => {
     const formData = new FormData();
     formData.append('image', imgRef.current.files[0]);
@@ -162,10 +172,6 @@ export default function EditVisionBoardModal({
               <p className={styles.modalTitle}>이미지 수정</p>
               <button className={styles.modalPostButton} onClick={() => {
                 handleSelect()
-                modalImgPutApi()
-                modalTextPutApi()
-                console.log('prevImgGrid[selectedGrid].fileName', prevImgGrid[selectedGrid].fileName)
-                console.log('gridItems', gridItems)
               }}>
                 수정 완료
               </button>

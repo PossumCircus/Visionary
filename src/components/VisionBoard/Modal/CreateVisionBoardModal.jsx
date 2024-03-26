@@ -58,10 +58,10 @@ export default function CreateVisionBoardModal({
       setText(inputText);
     }
   };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       setText((prevText) => prevText + '\n');
     }
   };

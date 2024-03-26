@@ -16,7 +16,7 @@ function Nav() {
               <div className={styles.visionary_site_nav_item}><Link to={'/customboard'}>커스텀보드</Link></div>
             </li>
             <li>
-              <div className={styles.visionary_site_nav_item}><Link to={'/myvisionboard'}>수정 모달</Link></div>
+              <div className={styles.visionary_site_nav_item}><Link to={'/myvisionboard'}>나의 비전보드</Link></div>
             </li>
             <li>
               <div className={styles.visionary_site_nav_item}><Link to={'/'}>3차기능</Link></div>

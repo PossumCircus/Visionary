@@ -50,8 +50,12 @@ export default function VisionBoardGrid() {
     checkUploadComplete();
   }, [gridItems, selectedOption]);
 
+  // 그리드 옵션 감지
+  const getRequiredUploadCount = () => {
+    return selectedOption === '1' ? 8 : 4;
+  };
+
   const checkUploadComplete = () => {
-    // 유저 선택 그리드 값 
     const requiredUploadCount = getRequiredUploadCount();
     let count = 0;
 
@@ -60,16 +64,11 @@ export default function VisionBoardGrid() {
         count++;
       }
     }
-
-    console.log('Upload Count:', count);
     setUploadCount(count);
     // 유저 선택 그리드 값과 업로드에 필요한 그리드 값이 일치할 경우(true) 업로드 가능.
     setIsUploadComplete(count === requiredUploadCount);
   };
-  // 유저 선택 그리드 값 감지
-  const getRequiredUploadCount = () => {
-    return selectedOption === '1' ? 8 : 4;
-  };
+
   //타이틀을 제외하고 모달 열림
   const handleGridItemClick = (index) => {
     if (gridItems[index].id !== '5') {
@@ -90,12 +89,9 @@ export default function VisionBoardGrid() {
 
       return updatedGridItems;
     });
-    // 아래 후에 삭제.
-    console.log(imgData);
-    console.log(textData);
 
     setUploadedText(textData);
-    // 양식 제출 후 모달 닫기
+
     setIsModalOpen(false);
   };
 
@@ -173,7 +169,7 @@ export default function VisionBoardGrid() {
     const formData = new FormData();
 
     formData.append('visionBoardData', gridItems[4].title)
-    
+
     for (const item of gridItems) {
       console.log('폼데이터 gridItems의 iteration:', item);
       if (item.img && item.text) {
@@ -253,7 +249,7 @@ export default function VisionBoardGrid() {
       </div>
       <div className={styles.btnContainer}>
         <button className={styles.deleteBtn} onClick={handleDeleteButtonClick}>
-          삭제
+          선택 삭제
         </button>
         <button className={styles.prevBtn} onClick={handleNavigateToBoardName}>
           이전
