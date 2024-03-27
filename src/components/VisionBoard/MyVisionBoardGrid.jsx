@@ -7,7 +7,7 @@ import EditVisionBoardModal from "./Modal/EditVisionBoardModal";
 const getVisionBoardDataById = async (id) => {
 
   try {
-    const response = await axios.get(`/api/v1/visionboard?id=${id}`, {
+    const response = await axios.get(`/api/v1/myvisionboard?id=${id}`, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -47,6 +47,7 @@ export default function MyVisionBoardGrid() {
   const id = useMemo(() => {
     return location.pathname.split('/')[2];
   });
+  
   const [gridItems, setGridItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [selectedGrid, setSelectedGrid] = useState(null);
