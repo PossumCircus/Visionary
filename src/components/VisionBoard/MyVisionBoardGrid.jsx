@@ -47,7 +47,7 @@ export default function MyVisionBoardGrid() {
   const id = useMemo(() => {
     return location.pathname.split('/')[2];
   });
-  
+
   const [gridItems, setGridItems] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [selectedGrid, setSelectedGrid] = useState(null);
@@ -534,11 +534,11 @@ export default function MyVisionBoardGrid() {
             closeModal={() => setIsModalOpen(false)}
             handleImageAndTextSelect={handleImageAndTextSelect}
             readOnly={readOnly}
-            gridOption={gridOption}
-          //     gridItems,
-          // selectedGrid,
-          // prevImgGrid,
-          // id,
+            dataLength={dataLength}
+            gridItems={gridItems}
+            selectedGrid={selectedGrid}
+            prevImgGrid={prevImgGrid}
+            id={id}
           />
         )
       }

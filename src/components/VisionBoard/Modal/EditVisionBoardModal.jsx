@@ -10,11 +10,11 @@ export default function EditVisionBoardModal({
   closeModal,
   handleImageAndTextSelect,
   readOnly,
-  // gridItems,
-  // selectedGrid,
-  // prevImgGrid,
-  // id,
-  // dataLength
+  gridItems,
+  selectedGrid,
+  prevImgGrid,
+  id,
+  dataLength
 }) {
 
   const [imgFile, setImgFile] = useState('');
